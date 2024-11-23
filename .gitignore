@@ -5,6 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 package-lock.json
+secrets.js
 yarn.lock
 .pnpm-debug.log
 
@@ -74,3 +75,5 @@ coverage/
 # React build artifacts
 /build
 /coverage
+
+C:\Users\Emanu\OneDrive\Documents\GitHub\TASK-MANAGER-FULLSTACK\src\secrets.js
