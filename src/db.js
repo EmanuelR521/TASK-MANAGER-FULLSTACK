@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import DBuri from "./secrets.js";
+import {DBuri} from "./secrets.js";
 
 export const connectDB = async () => {
     try{
