@@ -27,10 +27,38 @@ export const register = async (req, res) => {
 
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 
   
 };
 
-export const login = (req, res) => res.send("login");
+export const login = async (req, res) => {
+  const { email, password} = req.body;
+
+  try {
+
+    const userFound = await User.findOne({email})
+
+    if(!userFound) return res.status(400).json({message:'User not found'})
+
+    const isMatch = await bcrypt.compare(password, userFound.password)
+    //no es buena practica dar un error tan especifico, mejor invalid credentials
+    if(!isMatch) return res.status(400).json({message:'Incorrect password'});
+
+    const token = await createAccesToken({id:userFound._id});
+    res.cookie('token',token);
+    res.json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      createdAt: userFound.createdAt,
+      updatedAt: userFound.updatedAt,
+
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  
+};
