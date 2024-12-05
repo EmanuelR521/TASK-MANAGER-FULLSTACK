@@ -1,4 +1,4 @@
-
+import User from '../models/User';
 export const getTasks = async (req,res) => {};
 
 export const createTask = async (req,res) => {};
