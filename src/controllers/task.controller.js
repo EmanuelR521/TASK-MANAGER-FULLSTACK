@@ -1,7 +1,9 @@
 import Task from '../models/task.model.js';
 
 export const getTasks = async (req,res) => {
-   const tasks = await Task.find()
+   const tasks = await Task.find({
+    user : req.user.id
+   }).populate('user');
    res.json(tasks);
 };
 
@@ -40,5 +42,5 @@ export const deleteTask = async (req,res) => {
     if (!task) {
         return res.status(404).json({message: "Task not found"});
     }
-    res.json(task);
+    return res.sendStatus(204);
 };
